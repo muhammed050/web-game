@@ -1,0 +1,6 @@
+import {create} from 'zustand';
+export type Vec={x:number;y:number;z:number};
+export type Remote={id:string;name:string;position:Vec;rotation:number;vehicle?:string};
+export type Stats={cash:number;bank:number;level:number;xp:number;health:number;stamina:number;reputation:number};
+const initial:Stats={cash:250,bank:500,level:1,xp:0,health:100,stamina:100,reputation:0};
+export const useGame=create<{name:string;stats:Stats;position:Vec;vehicle:string|null;remotes:Record<string,Remote>;job:string|null;objective:string;setName:(name:string)=>void;setStats:(s:Partial<Stats>)=>void;setPosition:(p:Vec)=>void;setVehicle:(v:string|null)=>void;setRemotes:(r:Record<string,Remote>)=>void;setJob:(j:string|null)=>void;setObjective:(o:string)=>void}>((set)=>({name:'Rider',stats:initial,position:{x:0,y:0,z:8},vehicle:null,remotes:{},job:null,objective:'Explore NEON CITY',setName:name=>set({name}),setStats:s=>set(st=>({stats:{...st.stats,...s}})),setPosition:position=>set({position}),setVehicle:vehicle=>set({vehicle}),setRemotes:remotes=>set({remotes}),setJob:job=>set({job}),setObjective:objective=>set({objective})}));
